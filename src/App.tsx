@@ -4,18 +4,12 @@ import countriesJson from "./countries.json";
 import TopPage from "./pages/TopPage";
 import WorldPage from "./pages/WorldPage";
 import "./App.css";
+import { CountryDataType, AllCountriesDataType } from "./types";
 
 function App() {
   const [loading, setLoading] = useState<boolean>(false);
   const [country, setCountry] = useState<string>("japan");
 
-  type CountryDataType = {
-    date: string;
-    newConfirmed: number;
-    totalConfirmed: number;
-    newRecovered: number;
-    totalRecovered: number;
-  };
   const [countryData, setCountryData] = useState<CountryDataType>({
     date: "",
     newConfirmed: 0,
@@ -23,13 +17,6 @@ function App() {
     newRecovered: 0,
     totalRecovered: 0,
   });
-
-  interface SingleCountriesDataType {
-    Country: string;
-    NewConfirmed: number;
-    TotalConfirmed: number;
-  }
-  interface AllCountriesDataType extends Array<SingleCountriesDataType> {}
 
   const [allCountriesData, setAllCountriesData] =
     useState<AllCountriesDataType>([
