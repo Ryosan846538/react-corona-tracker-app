@@ -6,16 +6,39 @@ import WorldPage from "./pages/WorldPage";
 import "./App.css";
 
 function App() {
-  const [loading, setLoading] = useState(false);
-  const [country, setCountry] = useState("japan");
-  const [countryData, setCountryData] = useState({
+  const [loading, setLoading] = useState<boolean>(false);
+  const [country, setCountry] = useState<string>("japan");
+
+  type CountryDataType = {
+    date: string;
+    newConfirmed: number;
+    totalConfirmed: number;
+    newRecovered: number;
+    totalRecovered: number;
+  };
+  const [countryData, setCountryData] = useState<CountryDataType>({
     date: "",
-    newConfirmed: "",
-    totalConfirmed: "",
-    newRecovered: "",
-    totalRecovered: "",
+    newConfirmed: 0,
+    totalConfirmed: 0,
+    newRecovered: 0,
+    totalRecovered: 0,
   });
-  const [allCountriesData, setAllCountriesData] = useState([]);
+
+  interface SingleCountriesDataType {
+    Country: string;
+    NewConfirmed: number;
+    TotalConfirmed: number;
+  }
+  interface AllCountriesDataType extends Array<SingleCountriesDataType> {}
+
+  const [allCountriesData, setAllCountriesData] =
+    useState<AllCountriesDataType>([
+      {
+        Country: "",
+        NewConfirmed: 0,
+        TotalConfirmed: 0,
+      },
+    ]);
 
   useEffect(() => {
     const getCountryData = () => {
